@@ -1,0 +1,2451 @@
+{
+  "components": {
+    "schemas": {
+      "ApprovalRequest": {
+        "properties": {
+          "approve": {
+            "title": "Approve",
+            "type": "boolean"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "approve",
+          "reason"
+        ],
+        "title": "ApprovalRequest",
+        "type": "object"
+      },
+      "CustomerContactResponse": {
+        "properties": {
+          "channel": {
+            "enum": [
+              "whatsapp",
+              "sms",
+              "voice",
+              "email"
+            ],
+            "title": "Channel",
+            "type": "string"
+          },
+          "consent": {
+            "title": "Consent",
+            "type": "boolean"
+          },
+          "customer_id": {
+            "format": "uuid",
+            "title": "Customer Id",
+            "type": "string"
+          },
+          "masked_endpoint": {
+            "title": "Masked Endpoint",
+            "type": "string"
+          }
+        },
+        "required": [
+          "customer_id",
+          "channel",
+          "consent",
+          "masked_endpoint"
+        ],
+        "title": "CustomerContactResponse",
+        "type": "object"
+      },
+      "DashboardSummary": {
+        "properties": {
+          "action_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Action Counts",
+            "type": "object"
+          },
+          "active_cases": {
+            "title": "Active Cases",
+            "type": "integer"
+          },
+          "contacts_avoided": {
+            "title": "Contacts Avoided",
+            "type": "integer"
+          },
+          "customers_contacted": {
+            "title": "Customers Contacted",
+            "type": "integer"
+          },
+          "escalated_cases": {
+            "title": "Escalated Cases",
+            "type": "integer"
+          },
+          "recovery_spend_minor": {
+            "title": "Recovery Spend Minor",
+            "type": "integer"
+          },
+          "revenue_at_risk_minor": {
+            "title": "Revenue At Risk Minor",
+            "type": "integer"
+          },
+          "state_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "State Counts",
+            "type": "object"
+          },
+          "stopped_cases": {
+            "title": "Stopped Cases",
+            "type": "integer"
+          },
+          "verified_recovered_minor": {
+            "title": "Verified Recovered Minor",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "revenue_at_risk_minor",
+          "verified_recovered_minor",
+          "active_cases",
+          "stopped_cases",
+          "escalated_cases",
+          "customers_contacted",
+          "contacts_avoided",
+          "recovery_spend_minor",
+          "action_counts",
+          "state_counts"
+        ],
+        "title": "DashboardSummary",
+        "type": "object"
+      },
+      "EmailEndpointRequest": {
+        "properties": {
+          "consent": {
+            "title": "Consent",
+            "type": "boolean"
+          },
+          "email": {
+            "maxLength": 320,
+            "minLength": 5,
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "consent"
+        ],
+        "title": "EmailEndpointRequest",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "version"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "OperationsHealth": {
+        "properties": {
+          "database": {
+            "const": "ready",
+            "title": "Database",
+            "type": "string"
+          },
+          "failed_webhook_events": {
+            "title": "Failed Webhook Events",
+            "type": "integer"
+          },
+          "pending_outbox_events": {
+            "title": "Pending Outbox Events",
+            "type": "integer"
+          },
+          "redis": {
+            "enum": [
+              "ready",
+              "unavailable"
+            ],
+            "title": "Redis",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ready",
+              "degraded"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "database",
+          "redis",
+          "pending_outbox_events",
+          "failed_webhook_events"
+        ],
+        "title": "OperationsHealth",
+        "type": "object"
+      },
+      "PhoneEndpointRequest": {
+        "properties": {
+          "consent": {
+            "title": "Consent",
+            "type": "boolean"
+          },
+          "e164": {
+            "maxLength": 16,
+            "minLength": 9,
+            "title": "E164",
+            "type": "string"
+          }
+        },
+        "required": [
+          "e164",
+          "consent"
+        ],
+        "title": "PhoneEndpointRequest",
+        "type": "object"
+      },
+      "RazorpayTestImportCandidate": {
+        "properties": {
+          "amount_minor": {
+            "title": "Amount Minor",
+            "type": "integer"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "eligible": {
+            "title": "Eligible",
+            "type": "boolean"
+          },
+          "failure_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure Code"
+          },
+          "failure_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure Description"
+          },
+          "failure_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure Reason"
+          },
+          "invoice_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Invoice Id"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "payment_id": {
+            "title": "Payment Id",
+            "type": "string"
+          },
+          "skip_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skip Reason"
+          },
+          "subscription_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subscription Id"
+          }
+        },
+        "required": [
+          "payment_id",
+          "amount_minor",
+          "currency",
+          "occurred_at",
+          "failure_code",
+          "failure_reason",
+          "failure_description",
+          "subscription_id",
+          "invoice_id",
+          "eligible",
+          "skip_reason"
+        ],
+        "title": "RazorpayTestImportCandidate",
+        "type": "object"
+      },
+      "RazorpayTestImportRequest": {
+        "properties": {
+          "payment_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 25,
+            "minItems": 1,
+            "title": "Payment Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "payment_ids"
+        ],
+        "title": "RazorpayTestImportRequest",
+        "type": "object"
+      },
+      "RazorpayTestImportResult": {
+        "properties": {
+          "imported_case_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Imported Case Ids",
+            "type": "array"
+          },
+          "skipped_payment_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Skipped Payment Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "imported_case_ids",
+          "skipped_payment_ids"
+        ],
+        "title": "RazorpayTestImportResult",
+        "type": "object"
+      },
+      "RecoveryCaseDetail": {
+        "properties": {
+          "contact_count": {
+            "title": "Contact Count",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "customer": {
+            "additionalProperties": true,
+            "title": "Customer",
+            "type": "object"
+          },
+          "customer_id": {
+            "format": "uuid",
+            "title": "Customer Id",
+            "type": "string"
+          },
+          "customer_name": {
+            "default": "Customer",
+            "title": "Customer Name",
+            "type": "string"
+          },
+          "customer_segment": {
+            "default": "Subscription",
+            "title": "Customer Segment",
+            "type": "string"
+          },
+          "diagnosis": {
+            "additionalProperties": true,
+            "title": "Diagnosis",
+            "type": "object"
+          },
+          "episode_key": {
+            "title": "Episode Key",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "natural_recovery_score": {
+            "title": "Natural Recovery Score",
+            "type": "number"
+          },
+          "next_step": {
+            "default": "Observe provider outcome",
+            "title": "Next Step",
+            "type": "string"
+          },
+          "payment_history": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Payment History",
+            "type": "array"
+          },
+          "provider_reference": {
+            "default": "",
+            "title": "Provider Reference",
+            "type": "string"
+          },
+          "recommended_action": {
+            "default": "WAIT",
+            "title": "Recommended Action",
+            "type": "string"
+          },
+          "recovered_amount_minor": {
+            "title": "Recovered Amount Minor",
+            "type": "integer"
+          },
+          "recovered_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recovered At"
+          },
+          "recovery_priority": {
+            "default": "MEDIUM",
+            "title": "Recovery Priority",
+            "type": "string"
+          },
+          "replan_count": {
+            "title": "Replan Count",
+            "type": "integer"
+          },
+          "risk_amount_minor": {
+            "title": "Risk Amount Minor",
+            "type": "integer"
+          },
+          "source_type": {
+            "default": "Failed subscription",
+            "title": "Source Type",
+            "type": "string"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "subscription": {
+            "additionalProperties": true,
+            "title": "Subscription",
+            "type": "object"
+          },
+          "subscription_id": {
+            "format": "uuid",
+            "title": "Subscription Id",
+            "type": "string"
+          },
+          "terminal_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Terminal Reason"
+          },
+          "timeline": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Timeline",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "state",
+          "risk_amount_minor",
+          "currency",
+          "natural_recovery_score",
+          "diagnosis",
+          "created_at",
+          "customer_id",
+          "subscription_id",
+          "episode_key",
+          "contact_count",
+          "replan_count",
+          "terminal_reason",
+          "recovered_amount_minor",
+          "recovered_at",
+          "timeline"
+        ],
+        "title": "RecoveryCaseDetail",
+        "type": "object"
+      },
+      "RecoveryCaseListItem": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "customer_name": {
+            "default": "Customer",
+            "title": "Customer Name",
+            "type": "string"
+          },
+          "customer_segment": {
+            "default": "Subscription",
+            "title": "Customer Segment",
+            "type": "string"
+          },
+          "diagnosis": {
+            "additionalProperties": true,
+            "title": "Diagnosis",
+            "type": "object"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "natural_recovery_score": {
+            "title": "Natural Recovery Score",
+            "type": "number"
+          },
+          "next_step": {
+            "default": "Observe provider outcome",
+            "title": "Next Step",
+            "type": "string"
+          },
+          "provider_reference": {
+            "default": "",
+            "title": "Provider Reference",
+            "type": "string"
+          },
+          "recommended_action": {
+            "default": "WAIT",
+            "title": "Recommended Action",
+            "type": "string"
+          },
+          "recovery_priority": {
+            "default": "MEDIUM",
+            "title": "Recovery Priority",
+            "type": "string"
+          },
+          "risk_amount_minor": {
+            "title": "Risk Amount Minor",
+            "type": "integer"
+          },
+          "source_type": {
+            "default": "Failed subscription",
+            "title": "Source Type",
+            "type": "string"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "state",
+          "risk_amount_minor",
+          "currency",
+          "natural_recovery_score",
+          "diagnosis",
+          "created_at"
+        ],
+        "title": "RecoveryCaseListItem",
+        "type": "object"
+      },
+      "RecoveryRunPreviewRequest": {
+        "properties": {
+          "budget_minor": {
+            "exclusiveMinimum": 0.0,
+            "title": "Budget Minor",
+            "type": "integer"
+          },
+          "contact_budget": {
+            "minimum": 0.0,
+            "title": "Contact Budget",
+            "type": "integer"
+          },
+          "filters": {
+            "additionalProperties": true,
+            "title": "Filters",
+            "type": "object"
+          }
+        },
+        "required": [
+          "budget_minor",
+          "contact_budget"
+        ],
+        "title": "RecoveryRunPreviewRequest",
+        "type": "object"
+      },
+      "RecoveryRunResponse": {
+        "properties": {
+          "actions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Actions",
+            "type": "array"
+          },
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "budget_minor": {
+            "title": "Budget Minor",
+            "type": "integer"
+          },
+          "contact_budget": {
+            "title": "Contact Budget",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "estimated_incremental_minor": {
+            "title": "Estimated Incremental Minor",
+            "type": "integer"
+          },
+          "executed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Executed At"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "plan_version": {
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "reserved_contacts": {
+            "title": "Reserved Contacts",
+            "type": "integer"
+          },
+          "reserved_cost_minor": {
+            "title": "Reserved Cost Minor",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "budget_minor",
+          "contact_budget",
+          "reserved_cost_minor",
+          "reserved_contacts",
+          "estimated_incremental_minor",
+          "plan_version",
+          "created_at",
+          "approved_at",
+          "executed_at"
+        ],
+        "title": "RecoveryRunResponse",
+        "type": "object"
+      },
+      "SimulationAdvanceRequest": {
+        "properties": {
+          "command_id": {
+            "format": "uuid",
+            "title": "Command Id",
+            "type": "string"
+          },
+          "expected_progress": {
+            "maximum": 6.0,
+            "minimum": 0.0,
+            "title": "Expected Progress",
+            "type": "integer"
+          },
+          "promise_to_pay": {
+            "default": false,
+            "title": "Promise To Pay",
+            "type": "boolean"
+          },
+          "simulation_id": {
+            "format": "uuid",
+            "title": "Simulation Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "simulation_id",
+          "command_id",
+          "expected_progress"
+        ],
+        "title": "SimulationAdvanceRequest",
+        "type": "object"
+      },
+      "SimulationStartRequest": {
+        "properties": {
+          "command_id": {
+            "format": "uuid",
+            "title": "Command Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "command_id"
+        ],
+        "title": "SimulationStartRequest",
+        "type": "object"
+      },
+      "SimulationState": {
+        "properties": {
+          "case_id": {
+            "format": "uuid",
+            "title": "Case Id",
+            "type": "string"
+          },
+          "completed_steps": {
+            "items": {
+              "$ref": "#/components/schemas/SimulationStep"
+            },
+            "title": "Completed Steps",
+            "type": "array"
+          },
+          "last_event_at": {
+            "format": "date-time",
+            "title": "Last Event At",
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "in_progress",
+              "recovered",
+              "stopped"
+            ],
+            "title": "Outcome",
+            "type": "string"
+          },
+          "payment_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Url"
+          },
+          "progress": {
+            "title": "Progress",
+            "type": "integer"
+          },
+          "promise_to_pay_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promise To Pay At"
+          },
+          "recovered_amount_minor": {
+            "title": "Recovered Amount Minor",
+            "type": "integer"
+          },
+          "simulation_id": {
+            "format": "uuid",
+            "title": "Simulation Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "RUNNING",
+              "COMPLETED"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "simulation_id",
+          "case_id",
+          "progress",
+          "status",
+          "outcome",
+          "completed_steps",
+          "promise_to_pay_at",
+          "recovered_amount_minor",
+          "payment_url",
+          "last_event_at"
+        ],
+        "title": "SimulationState",
+        "type": "object"
+      },
+      "SimulationStep": {
+        "properties": {
+          "actor": {
+            "title": "Actor",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "event_kind": {
+            "title": "Event Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "progress": {
+            "title": "Progress",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "progress",
+          "event_kind",
+          "label",
+          "detail",
+          "actor",
+          "created_at"
+        ],
+        "title": "SimulationStep",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "WebhookAccepted": {
+        "properties": {
+          "accepted": {
+            "default": true,
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "duplicate": {
+            "title": "Duplicate",
+            "type": "boolean"
+          },
+          "event_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Id"
+          }
+        },
+        "required": [
+          "duplicate"
+        ],
+        "title": "WebhookAccepted",
+        "type": "object"
+      },
+      "WebhookEventListItem": {
+        "properties": {
+          "event_type": {
+            "title": "Event Type",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "occurred_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Occurred At"
+          },
+          "processed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processed At"
+          },
+          "processing_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Error"
+          },
+          "provider_event_id": {
+            "title": "Provider Event Id",
+            "type": "string"
+          },
+          "received_at": {
+            "format": "date-time",
+            "title": "Received At",
+            "type": "string"
+          },
+          "signature_valid": {
+            "title": "Signature Valid",
+            "type": "boolean"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "provider_event_id",
+          "event_type",
+          "source",
+          "signature_valid",
+          "occurred_at",
+          "received_at",
+          "processed_at",
+          "processing_error"
+        ],
+        "title": "WebhookEventListItem",
+        "type": "object"
+      },
+      "WhatsAppEndpointRequest": {
+        "properties": {
+          "consent": {
+            "title": "Consent",
+            "type": "boolean"
+          },
+          "e164": {
+            "maxLength": 16,
+            "minLength": 9,
+            "title": "E164",
+            "type": "string"
+          }
+        },
+        "required": [
+          "e164",
+          "consent"
+        ],
+        "title": "WhatsAppEndpointRequest",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Policy-bounded recurring revenue recovery",
+    "title": "ChaseLess API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/customers/{customer_id}/contact-endpoints/email": {
+      "put": {
+        "operationId": "set_email_endpoint_api_v1_customers__customer_id__contact_endpoints_email_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Customer Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailEndpointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerContactResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set Email Endpoint"
+      }
+    },
+    "/api/v1/customers/{customer_id}/contact-endpoints/phone/{channel}": {
+      "put": {
+        "operationId": "set_phone_endpoint_api_v1_customers__customer_id__contact_endpoints_phone__channel__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Customer Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": [
+                "sms",
+                "voice"
+              ],
+              "title": "Channel",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneEndpointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerContactResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set Phone Endpoint"
+      }
+    },
+    "/api/v1/customers/{customer_id}/contact-endpoints/whatsapp": {
+      "put": {
+        "operationId": "set_whatsapp_endpoint_api_v1_customers__customer_id__contact_endpoints_whatsapp_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Customer Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatsAppEndpointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerContactResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set Whatsapp Endpoint"
+      }
+    },
+    "/api/v1/dashboard/summary": {
+      "get": {
+        "operationId": "dashboard_summary_api_v1_dashboard_summary_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardSummary"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Dashboard Summary"
+      }
+    },
+    "/api/v1/demo/reset": {
+      "post": {
+        "description": "Reset the labelled demo portfolio and restore safe demo contacts.",
+        "operationId": "reset_demo_data_api_v1_demo_reset_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Reset Demo Data Api V1 Demo Reset Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reset Demo Data"
+      }
+    },
+    "/api/v1/evaluation/latest": {
+      "get": {
+        "operationId": "latest_evaluation_api_v1_evaluation_latest_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Latest Evaluation Api V1 Evaluation Latest Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Latest Evaluation"
+      }
+    },
+    "/api/v1/operations/health": {
+      "get": {
+        "operationId": "operations_health_api_v1_operations_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationsHealth"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Operations Health"
+      }
+    },
+    "/api/v1/razorpay/test-import": {
+      "post": {
+        "operationId": "import_razorpay_test_payments_api_v1_razorpay_test_import_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RazorpayTestImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RazorpayTestImportResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Import Razorpay Test Payments"
+      }
+    },
+    "/api/v1/razorpay/test-import/preview": {
+      "get": {
+        "operationId": "preview_razorpay_test_import_api_v1_razorpay_test_import_preview_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "count",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Count",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RazorpayTestImportCandidate"
+                  },
+                  "title": "Response Preview Razorpay Test Import Api V1 Razorpay Test Import Preview Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Preview Razorpay Test Import"
+      }
+    },
+    "/api/v1/recovery-actions/recent": {
+      "get": {
+        "operationId": "recent_recovery_actions_api_v1_recovery_actions_recent_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 12,
+              "maximum": 50,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "title": "Response Recent Recovery Actions Api V1 Recovery Actions Recent Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Recent Recovery Actions"
+      }
+    },
+    "/api/v1/recovery-actions/{action_id}/approval": {
+      "post": {
+        "operationId": "approve_recovery_action_api_v1_recovery_actions__action_id__approval_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "action_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Action Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Approve Recovery Action Api V1 Recovery Actions  Action Id  Approval Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve Recovery Action"
+      }
+    },
+    "/api/v1/recovery-cases": {
+      "get": {
+        "operationId": "list_cases_api_v1_recovery_cases_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "State"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RecoveryCaseListItem"
+                  },
+                  "title": "Response List Cases Api V1 Recovery Cases Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Cases"
+      }
+    },
+    "/api/v1/recovery-cases/{case_id}": {
+      "get": {
+        "operationId": "get_case_api_v1_recovery_cases__case_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryCaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Case"
+      }
+    },
+    "/api/v1/recovery-cases/{case_id}/simulation": {
+      "get": {
+        "operationId": "get_case_simulation_api_v1_recovery_cases__case_id__simulation_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulationState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Case Simulation"
+      }
+    },
+    "/api/v1/recovery-cases/{case_id}/simulation/advance": {
+      "post": {
+        "operationId": "advance_case_simulation_api_v1_recovery_cases__case_id__simulation_advance_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationAdvanceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulationState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Advance Case Simulation"
+      }
+    },
+    "/api/v1/recovery-cases/{case_id}/simulation/start": {
+      "post": {
+        "operationId": "start_case_simulation_api_v1_recovery_cases__case_id__simulation_start_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationStartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulationState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start Case Simulation"
+      }
+    },
+    "/api/v1/recovery-runs/preview": {
+      "post": {
+        "operationId": "preview_run_api_v1_recovery_runs_preview_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecoveryRunPreviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryRunResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Preview Run"
+      }
+    },
+    "/api/v1/recovery-runs/{run_id}": {
+      "get": {
+        "operationId": "get_run_api_v1_recovery_runs__run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryRunResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Run"
+      }
+    },
+    "/api/v1/recovery-runs/{run_id}/approve": {
+      "post": {
+        "operationId": "approve_recovery_run_api_v1_recovery_runs__run_id__approve_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryRunResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve Recovery Run"
+      }
+    },
+    "/api/v1/recovery-runs/{run_id}/execute": {
+      "post": {
+        "operationId": "execute_recovery_run_api_v1_recovery_runs__run_id__execute_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Internal-Token",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Internal-Token",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryRunResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Execute Recovery Run"
+      }
+    },
+    "/api/v1/review-queue": {
+      "get": {
+        "description": "List actions that require an explicit human decision or follow-up.",
+        "operationId": "review_queue_api_v1_review_queue_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "title": "Response Review Queue Api V1 Review Queue Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Review Queue"
+      }
+    },
+    "/api/v1/voice/audio": {
+      "get": {
+        "description": "Synthesize a short signed voice prompt with Sarvam Bulbul for telephone playback.",
+        "operationId": "voice_audio_api_v1_voice_audio_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "message",
+            "required": true,
+            "schema": {
+              "title": "Message",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "schema": {
+              "title": "Signature",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Voice Audio"
+      }
+    },
+    "/api/v1/voice/response": {
+      "post": {
+        "description": "Capture a Twilio IVR response and apply only deterministic follow-up states.",
+        "operationId": "voice_response_api_v1_voice_response_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "action_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Action Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "schema": {
+              "title": "Signature",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Voice Response"
+      }
+    },
+    "/api/v1/voice/twiml": {
+      "get": {
+        "description": "Serve signed, bounded voice instructions without exposing an open text-to-call endpoint.",
+        "operationId": "voice_twiml_api_v1_voice_twiml_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "message",
+            "required": true,
+            "schema": {
+              "title": "Message",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "schema": {
+              "title": "Signature",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "action_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Action Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Voice Twiml"
+      },
+      "post": {
+        "description": "Serve signed, bounded voice instructions without exposing an open text-to-call endpoint.",
+        "operationId": "voice_twiml_api_v1_voice_twiml_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "message",
+            "required": true,
+            "schema": {
+              "title": "Message",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "schema": {
+              "title": "Signature",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "action_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Action Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Voice Twiml"
+      }
+    },
+    "/api/v1/webhook-events": {
+      "get": {
+        "operationId": "list_webhook_events_api_v1_webhook_events_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/WebhookEventListItem"
+                  },
+                  "title": "Response List Webhook Events Api V1 Webhook Events Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Webhook Events"
+      }
+    },
+    "/api/v1/webhooks/razorpay": {
+      "post": {
+        "operationId": "razorpay_webhook_api_v1_webhooks_razorpay_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-razorpay-signature",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Razorpay-Signature",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-razorpay-event-id",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "X-Razorpay-Event-Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookAccepted"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Razorpay Webhook"
+      }
+    },
+    "/health/live": {
+      "get": {
+        "operationId": "live_health_live_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Live"
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "ready_health_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ready"
+      }
+    }
+  }
+}

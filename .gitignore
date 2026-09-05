@@ -1,0 +1,24 @@
+.env
+.env.*
+!.env.example
+cred.txt
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+node_modules/
+.next/
+dist/
+coverage/
+.codex-prd-review/
+*.log
+*.db
+.DS_Store
+
+# Private submission assets kept locally, not published to GitHub
+docs/VIDEO_WALKTHROUGH.md
+docs/RAZORPAY_TEST_MODE.md

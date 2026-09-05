@@ -1,0 +1,60 @@
+{
+  "code_version": "working-tree",
+  "config": {
+    "budget_minor": 1000000,
+    "contact_budget": 3500,
+    "customers": 10000,
+    "dataset_version": "synthetic-v1",
+    "seed": 20260901
+  },
+  "config_hash": "1b957e53682a51b9e90f541993a1ba0343b56d25282a491ead143403a46c5111",
+  "generated_at": "2026-09-04T20:40:28.646466+00:00",
+  "metrics": {
+    "chaseless": {
+      "action_counts": {
+        "NATIVE_RETRY_WAIT": 2660,
+        "PAYMENT_LINK": 2000,
+        "STOP": 682,
+        "WAIT": 4658
+      },
+      "contacts": 2000,
+      "median_time_to_recover_hours": 37.21,
+      "p90_time_to_recover_hours": 65.21,
+      "policy_violations": 0,
+      "recovered_cases": 4275,
+      "recovered_minor": 801022500,
+      "spend_minor": 1000000
+    },
+    "fixed_dunning": {
+      "action_counts": {
+        "NUDGE": 3500,
+        "STOP": 738,
+        "WAIT": 5762
+      },
+      "contacts": 3500,
+      "median_time_to_recover_hours": 37.11,
+      "p90_time_to_recover_hours": 65.13,
+      "policy_violations": 0,
+      "recovered_cases": 3766,
+      "recovered_minor": 701363400,
+      "spend_minor": 875000
+    },
+    "incremental": {
+      "contacts_avoided_vs_fixed": 1500,
+      "vs_fixed_dunning_minor": 99659100,
+      "vs_native_recovery_minor": 210171200
+    },
+    "native_recovery": {
+      "action_counts": {
+        "WAIT": 10000
+      },
+      "contacts": 0,
+      "median_time_to_recover_hours": 36.89,
+      "p90_time_to_recover_hours": 65.14,
+      "policy_violations": 0,
+      "recovered_cases": 3187,
+      "recovered_minor": 590851300,
+      "spend_minor": 0
+    }
+  }
+}

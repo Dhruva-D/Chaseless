@@ -1,0 +1,11 @@
+.git
+.env
+.venv
+**/node_modules
+**/.next
+**/__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.codex-prd-review
+*.db
