@@ -29,6 +29,12 @@ SCENARIOS = [
     ("Kavya Rao", "INSUFFICIENT_FUNDS", "pending", 99_900, 5, 2, 0, False),
     ("Northstar Labs", "CARD_EXPIRED", "halted", 799_900, 10, 3, 1, False),
     ("Paperplane Studio", "BAD_REQUEST_ERROR", "halted", 949_900, 12, 2, 0, False),
+    ("Meera Shah", "CARD_DECLINED", "halted", 149_900, 9, 1, 0, False),
+    ("Orbit Systems", "LOW_BALANCE", "pending", 499_900, 8, 2, 1, False),
+    ("Rohan Iyer", "MANDATE_INVALID", "halted", 299_900, 7, 2, 0, False),
+    ("Bluewood Ventures", "TOKEN_EXPIRED", "halted", 1_249_900, 16, 1, 1, False),
+    ("Anika Retail", "BANK_ACCOUNT_INSUFFICIENT", "pending", 74_900, 4, 3, 2, False),
+    ("Vertex Media", "ACCOUNT_CLOSED", "halted", 349_900, 11, 1, 0, False),
 ]
 
 CASE_META = [
@@ -59,6 +65,48 @@ CASE_META = [
         "PAYMENT_LINK",
         "Create and send a Razorpay Payment Link after confirmation",
         "CRITICAL",
+    ),
+    (
+        "SaaS subscription",
+        "Failed subscription",
+        "UPDATE_PAYMENT_METHOD",
+        "Send a secure payment-method update request by email",
+        "HIGH",
+    ),
+    (
+        "Membership",
+        "Failed subscription",
+        "NUDGE",
+        "Send a consented WhatsApp reminder, then wait for the retry window",
+        "MEDIUM",
+    ),
+    (
+        "SaaS subscription",
+        "Failed subscription",
+        "VOICE_AGENT",
+        "Use a voice recovery call to resolve mandate remediation",
+        "HIGH",
+    ),
+    (
+        "B2B account",
+        "Overdue B2B invoice",
+        "PAYMENT_LINK",
+        "Create a high-value Razorpay Payment Link after a finance-owner call",
+        "CRITICAL",
+    ),
+    (
+        "Membership",
+        "Failed subscription",
+        "NUDGE",
+        "Send a low-friction SMS reminder and allow native retry to complete",
+        "MEDIUM",
+    ),
+    (
+        "B2B account",
+        "Overdue B2B invoice",
+        "HUMAN_ESCALATE",
+        "Stop automated contact and route the non-recoverable account to a human",
+        "HIGH",
     ),
 ]
 
