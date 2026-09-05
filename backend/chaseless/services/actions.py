@@ -3,6 +3,7 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime, timedelta
 
+import httpx
 from sqlalchemy.orm import Session
 
 from chaseless.core.contact_crypto import ContactEncryptionError
@@ -467,9 +468,9 @@ def execute_action(db: Session, action_id: uuid.UUID, settings: Settings) -> Non
                 delivery_state = call.status
             else:
                 raise VoiceConfigurationError("Unsupported voice provider")
-        except (ContactEncryptionError, VoiceConfigurationError) as exc:
+        except (ContactEncryptionError, VoiceConfigurationError, httpx.HTTPError) as exc:
             action.status = ActionStatus.FAILED.value
-            action.last_error = "VOICE_DELIVERY_FAILED: " + str(exc)
+            action.last_error = "VOICE_DELIVERY_FAILED: " + (str(exc) or type(exc).__name__)
             append_audit(
                 db,
                 merchant_id=case.merchant_id,

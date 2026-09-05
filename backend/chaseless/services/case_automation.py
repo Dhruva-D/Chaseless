@@ -209,4 +209,7 @@ def execute_scheduled_case_action(action_id: uuid.UUID, delay_seconds: float = 2
                 execute_action(db, action.id, get_settings())
             except Exception as exc:
                 action.status = ActionStatus.FAILED.value
-                action.last_error = f"AUTOMATION_EXECUTION_FAILED: {type(exc).__name__}"
+                action.last_error = (
+                    f"AUTOMATION_EXECUTION_FAILED: {type(exc).__name__}"
+                    + (f": {exc}" if str(exc) else "")
+                )[:1000]
