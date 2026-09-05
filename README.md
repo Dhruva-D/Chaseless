@@ -148,6 +148,20 @@ See [docs/EVALUATION.md](docs/EVALUATION.md) for metric definitions and reproduc
   money, masked contacts and append-only audit events.
 - **Operations:** Docker Compose, health/readiness endpoints and structured logs.
 
+## External technology integrations
+
+| Integration | Responsibility in the recovery loop |
+| --- | --- |
+| **Razorpay Test Mode APIs** | Ingest payment/subscription failure signals, create test-mode Payment Links, and verify outcomes through signed webhook events. |
+| **Google Gemini API** | Primary bounded reasoning layer for diagnosis, recovery-action selection, and reviewer-facing rationale. |
+| **Groq API** | Fallback inference provider when Gemini is unavailable or returns an invalid response. |
+| **Twilio APIs** | Consent-gated SMS, WhatsApp, and voice-agent delivery to the configured test recipient, including delivery status and callback events. |
+| **Sarvam AI APIs** | Indian-language/Hinglish voice synthesis for the voice recovery experience and promise-to-pay interaction. |
+
+All provider calls are isolated behind adapters. Provider output is treated as untrusted input and
+must pass schema validation, policy authorization, consent checks, idempotency controls, and audit
+logging before it can affect a recovery case.
+
 ## Run locally
 
 Requirements: Docker Desktop, a Razorpay Test Mode account, and optional Gemini/Groq/Twilio
