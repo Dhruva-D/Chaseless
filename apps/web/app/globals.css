@@ -26,7 +26,10 @@ button, input { font: inherit; }
   top: 0; z-index: 20; backdrop-filter: blur(12px);
 }
 .brand { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 800; letter-spacing: .12em; }
-.brandMark { display: grid; place-items: center; width: 34px; height: 34px; color: white; border-radius: 9px; background: var(--blue); letter-spacing: 0; }
+.brandMark { position: relative; display: grid; place-items: center; width: 36px; height: 36px; color: white; border-radius: 11px; background: linear-gradient(145deg, #4968ff, #2948d7); box-shadow: 0 5px 14px rgba(55, 83, 230, .24); letter-spacing: 0; overflow: hidden; }
+.brandMark::before { content: ""; position: absolute; inset: 4px; border: 1px solid rgba(255,255,255,.28); border-radius: 8px; }
+.brandGlyph { position: relative; z-index: 1; font-size: 20px; font-weight: 900; line-height: 1; transform: translateX(-1px); }
+.brandPulse { position: absolute; right: 6px; bottom: 6px; width: 5px; height: 5px; border-radius: 50%; background: #9ff4d0; box-shadow: 0 0 0 3px rgba(159,244,208,.16); }
 .topbar nav { display: flex; align-items: center; gap: 24px; color: var(--muted); font-size: 14px; }
 .topbar nav a:hover { color: var(--ink); }
 .topbar nav .navActive { color: var(--ink); font-weight: 750; }

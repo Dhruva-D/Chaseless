@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <header className="topbar">
           <Link href="/" className="brand" aria-label="ChaseLess home">
-            <span className="brandMark">C</span>
+            <span className="brandMark" aria-hidden="true"><span className="brandGlyph">C</span><span className="brandPulse" /></span>
             <span>CHASELESS</span>
           </Link>
           <nav aria-label="Primary navigation">
