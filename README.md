@@ -146,7 +146,7 @@ See [docs/EVALUATION.md](docs/EVALUATION.md) for metric definitions and reproduc
 - **Outreach:** Twilio voice, SMS and WhatsApp adapters with consent and provider guardrails.
 - **Integrity:** transactional outbox, event deduplication, idempotent execution, integer minor-unit
   money, masked contacts and append-only audit events.
-- **Operations:** Docker Compose, health/readiness endpoints, structured logs and CI checks.
+- **Operations:** Docker Compose, health/readiness endpoints and structured logs.
 
 ## Run locally
 
@@ -161,7 +161,7 @@ docker compose exec api python -m scripts.seed_demo
 ```
 
 Open [http://localhost:3000](http://localhost:3000). The root Refresh control reseeds the
-controlled test portfolio with stable recipients and four recovery scenarios. External
+controlled test portfolio with stable recipients and ten recovery scenarios. External
 notifications are restricted to the configured test recipient.
 
 For an HTTPS Razorpay webhook during local testing:
@@ -184,7 +184,6 @@ cd apps/web && pnpm lint && pnpm build
 - [Architecture and trust boundaries](docs/ARCHITECTURE.md)
 - [API and provider contracts](docs/API.md)
 - [Track 03 submission and evidence map](docs/SUBMISSION.md)
-- [Five-minute video walkthrough](docs/VIDEO_WALKTHROUGH.md)
 - [Reproducible evaluation](docs/EVALUATION.md)
 - [Razorpay Test Mode operations](docs/RAZORPAY_TEST_MODE.md)
 - [Failure recovery log](docs/FAILURES.md)
